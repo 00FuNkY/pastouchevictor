@@ -15,6 +15,7 @@
   "author": "Malo Pivert",
   "license": "ISC",
   "dependencies": {
+    "@prisma/cli": "^2.15.0",
     "@prisma/client": "^2.15.0",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
@@ -23,8 +24,7 @@
     "express": "^4.17.1",
     "helmet": "^4.4.1",
     "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.10.0",
-    "prisma": "^2.16.0"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "eslint": "^7.14.0",
