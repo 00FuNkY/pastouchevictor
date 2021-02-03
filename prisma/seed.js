@@ -122,6 +122,7 @@ async function main() {
         .then((results) => resolve(results))
         .catch((e) => reject(e));
     });
+    // eslint-disable-next-line no-undef
     createCommands.then(success, fail);
   };
 
