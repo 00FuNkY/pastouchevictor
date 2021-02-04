@@ -34,8 +34,8 @@ router.post('/', async (req, res, next) => {
         Picture1,
         Picture2,
         Picture3,
-        Price,
-        RoyalFamilyId,
+        Price: parseInt(Price, 10),
+        RoyalFamilyId: parseInt(RoyalFamilyId, 10),
       },
     });
     res.status(200).json(results);
