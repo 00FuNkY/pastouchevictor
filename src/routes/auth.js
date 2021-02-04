@@ -3,10 +3,11 @@ const express = require('express');
 const prisma = require('../prismaClient');
 
 const { decodePassword, hashPassword } = require('../util');
+const { jwtDecode } = require('../middlewares');
 
 const router = express.Router();
 
-router.get('/', async (req, res, next) => {
+router.get('/', jwtDecode, async (req, res, next) => {
   try {
     const results = await prisma.admin.findMany();
 

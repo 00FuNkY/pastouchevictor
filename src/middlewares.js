@@ -1,5 +1,23 @@
 const jwt = require('jsonwebtoken');
 
+function jwtDecodePOST(req, res, next) {
+  // body.body because the object is called body when headers and body are in him
+  const { authorization } = req.body.headers;
+  try {
+    if (!authorization) throw new Error('no Authorization header found');
+
+    const [bearer, token] = authorization.split(' ');
+
+    if (bearer === 'Bearer' && token) {
+      const decoded = jwt.verify(token, process.env.SECRET);
+      req.user = decoded;
+      next();
+    }
+  } catch (error) {
+    res.status(403);
+    next(error);
+  }
+}
 function jwtDecode(req, res, next) {
   const { authorization } = req.headers;
   try {
@@ -57,6 +75,7 @@ function errorHandler(err, req, res, next) {
 module.exports = {
   notFound,
   jwtDecode,
+  jwtDecodePOST,
   checkIfRoleIs,
   errorHandler,
 };

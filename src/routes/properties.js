@@ -1,4 +1,5 @@
 const express = require('express');
+const { jwtDecode, jwtDecodePOST } = require('../middlewares');
 
 const prisma = require('../prismaClient');
 
@@ -14,7 +15,7 @@ router.get('/', async (req, res, next) => {
 });
 
 // mettre le middleware sur cette route
-router.post('/', async (req, res, next) => {
+router.post('/', jwtDecodePOST, async (req, res, next) => {
   const {
     Title,
     Description,
@@ -24,7 +25,7 @@ router.post('/', async (req, res, next) => {
     Picture3,
     Price,
     RoyalFamilyId,
-  } = req.body;
+  } = req.body.body;
   try {
     const results = await prisma.properties.create({
       data: {
@@ -47,7 +48,7 @@ router.post('/', async (req, res, next) => {
 // put not needed
 
 // mettre le middleware
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', jwtDecode, async (req, res, next) => {
   const { id } = req.params;
   try {
     await prisma.properties.delete({
